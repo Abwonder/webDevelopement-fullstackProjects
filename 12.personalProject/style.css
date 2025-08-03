@@ -1,0 +1,12 @@
+.body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  background-color: blue;
+  font-family: Arial, sans-serif;
+}
+
+.header-image{
+  height: 100vh;
+  display: block;
+}
