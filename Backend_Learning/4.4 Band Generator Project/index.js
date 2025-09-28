@@ -13,14 +13,20 @@ app.use(express.static("public"));
 //Step 4 - Add a dynamic year to the footer.
 //Hint: Google to find out how to get the current year using JS.
 
+const nYear = new Date().getFullYear();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { year: nYear });
   //Step 1 - Make the get route work and render the index.ejs file.
 });
 
 app.post("/submit", (req, res) => {
+  const randomAdj = adj[Math.floor(Math.random() * adj.length)];
+  const randomNoun = noun[Math.floor(Math.random() * noun.length)];
+  // console.log(randomAdj, randomNoun);
+  res.render("index.ejs", { year: nYear, adj: randomAdj, noun: randomNoun });
   //Step 2 - Make the generate name functionality work
   //Hint: When the "Generate Name" button in index.ejs is clicked, it should hit up this route.
   //Then:
