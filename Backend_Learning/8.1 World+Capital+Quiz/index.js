@@ -22,6 +22,20 @@ let quiz = [
   { country: "United States of America", capital: "New York" },
 ];
 
+
+db.query("SELECT * FROM capitals", (err, res) => {
+  if (err) {
+    console.error("Error executing query", err.stack);
+    // return;
+  } else {
+    console.log(res.rows[0]);
+    quiz = res.rows;
+  console.log(quiz);
+  }
+  db.end();
+});
+
+
 let totalCorrect = 0;
 
 // Middleware
@@ -57,4 +71,11 @@ app.post("/submit", (req, res) => {
 });
 
 async function nextQuestion() {
-  const randomCountry = quiz[Math.floor(Math.random() * qu
+  const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
+
+  currentQuestion = randomCountry;
+}
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
