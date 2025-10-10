@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | TAII</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003366;
+      --secondary: #F39C12;
+      --neutral: #F5F5F5;
+      --heading-font: 'Playfair Display', serif;
+      --body-font: 'Lato', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--body-font);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: var(--neutral);
+      color: var(--primary);
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--heading-font);
+      color: var(--secondary);
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      background: var(--secondary);
+      color: white;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #d7810b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>Page Coming Soon</h2>
+    <p>The page you are trying to access is not yet available.<br>We’re working on it, check back later!</p>
+    <a href="./index.html" class="btn">Back to Homepage</a>
+  </div>
+</body>
+</html>
