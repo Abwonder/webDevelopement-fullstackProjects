@@ -11,10 +11,8 @@
     padding: 24px;
   }
   .session-window.is-open{ display: flex; }
-
   /* Optional: avoid the builder showing it permanently */
   .session-window:not(.is-open){ display: none !important; }
-
   /* Dialog */
   .sw-dialog{
     width: min(1100px, 96vw);
@@ -31,7 +29,6 @@
     from{ opacity:.6; transform: translateY(14px); }
     to  { opacity:1;  transform: translateY(8px); }
   }
-
   .sw-header{
     display:flex; align-items:center; justify-content:space-between;
     padding: 12px 14px; border-bottom:1px solid #eef1f4; background:#fafafa;
@@ -43,7 +40,6 @@
     display:inline-flex; align-items:center; justify-content:center;
   }
   .sw-close:hover{ background:#f8fafc; }
-
   /* Body: grid layout (Vapi left, editor right) */
   .sw-body{ padding: 16px; }
   .sess-grid{
@@ -52,23 +48,15 @@
     gap: 16px;
     align-items: start;
   }
-
-  /* Vapi card 
-  .sess-vapi-card{
-    background:#fff; border:1px solid #e6e8eb; border-radius:14px;
-    padding:14px; box-shadow:0 10px 24px rgba(0,0,0,.06);
-  }*/
   /* Keep Vapi widget positioned sanely inside its card */
   vapi-widget .vapi-widget-wrapper>div{ position:relative !important; left: 0 !important; bottom: 0 !important; }
   vapi-widget .vapi-widget-wrapper>div>div{ width: 100% !important; }
-
   /* Editor card */
   .sess-editor-card{
     background:#fff; border:1px solid #e6e8eb; border-radius:14px;
     box-shadow:0 10px 24px rgba(0,0,0,.06); overflow:hidden;
   }
   .sess-ed-hdr{ padding:10px 12px; border-bottom:1px dashed #eaecef; color:#6b7280; }
-
   /* Toolbar */
   .sess-toolbar{
     display:flex; gap:8px; align-items:center; flex-wrap:wrap;
@@ -84,14 +72,32 @@
   .sess-tbtn.is-active{ border-color:#93c5fd; box-shadow:0 0 0 3px rgba(59,130,246,.15); }
   .sess-sep{ width:1px; height:24px; background:#e6e8eb; margin:0 2px; }
   .sess-color{ position:absolute; width:0; height:0; opacity:0; pointer-events:none; }
-
   /* Editable area */
   .sess-editor{
     min-height: 420px; max-height: 54vh; overflow:auto;
     padding:16px; outline:none; line-height:1.6; font-size:16px; color:#111827;
   }
   .sess-editor:empty:before{ content:"Add a note"; color:#9ca3af; }
-
+  
+  /* NEW: Transcript styling ONLY */
+  .transcript-entry{
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .transcript-entry:last-child{ border-bottom: none; }
+  .speaker-label{
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  .speaker-patient{ color: #2563eb; }
+  .speaker-doctor{ color: #059669; }
+  .transcript-text{
+    color: #374151;
+    line-height: 1.5;
+  }
+  
   /* Responsive */
   @media (max-width: 960px){
     .sw-dialog{ width: min(96vw, 760px); }
@@ -104,12 +110,12 @@
     <div class="sw-title">Derme Practitioner - Free Demo</div>
     <button class="sw-close" type="button" aria-label="Close">×</button>
   </div>
-
   <div class="sw-body">
     <div class="sess-grid">
       <!-- LEFT: Vapi -->
       <div class="sess-vapi-card">
         <vapi-widget
+          id="vapiWidget"
           public-key="e2054889-699b-4241-9260-32b5b08e62b6"
           assistant-id="a61643d8-78f3-4864-be73-356849aa53d3"
           mode="voice"
@@ -136,34 +142,27 @@
         </vapi-widget>
         <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
       </div>
-
       <!-- RIGHT: Editor -->
       <div class="sess-editor-card">
         <div class="sess-ed-hdr">Full SOAP Note with Coding and rationale:</div>
-
         <div class="sess-toolbar" role="toolbar" aria-label="Editor toolbar">
           <button type="button" class="sess-tbtn" data-cmd="bold"        title="Bold"><b>B</b></button>
           <button type="button" class="sess-tbtn" data-cmd="italic"      title="Italic"><i>I</i></button>
           <button type="button" class="sess-tbtn" data-cmd="underline"   title="Underline"><u>U</u></button>
           <button type="button" class="sess-tbtn" data-cmd="strikeThrough" title="Strikethrough"><s>S</s></button>
           <span class="sess-sep" aria-hidden="true"></span>
-
           <button type="button" class="sess-tbtn" id="colorBtn" title="Text color">A</button>
           <input type="color" class="sess-color" id="colorPicker" value="#111827"/>
           <span class="sess-sep" aria-hidden="true"></span>
-
           <button type="button" class="sess-tbtn" data-cmd="insertUnorderedList" title="Bulleted list">• List</button>
           <button type="button" class="sess-tbtn" data-cmd="insertOrderedList"   title="Numbered list">1. List</button>
           <span class="sess-sep" aria-hidden="true"></span>
-
           <button type="button" class="sess-tbtn" id="linkBtn" title="Link">🔗</button>
           <button type="button" class="sess-tbtn" data-cmd="unlink" title="Unlink">⟲</button>
           <span class="sess-sep" aria-hidden="true"></span>
-
           <button type="button" class="sess-tbtn" data-cmd="undo" title="Undo">↶</button>
           <button type="button" class="sess-tbtn" data-cmd="redo" title="Redo">↷</button>
         </div>
-
         <div class="sess-editor" id="sessEditor" contenteditable="true"></div>
       </div>
     </div>
@@ -177,6 +176,8 @@
   const DIALOG  = SECTION?.querySelector('.sw-dialog');
   const CLOSE   = SECTION?.querySelector('.sw-close');
 
+  let transcriptMonitor = null;
+
   function disableScroll(on){
     if (on){ document.documentElement.style.overflow = 'hidden'; }
     else   { document.documentElement.style.overflow = ''; }
@@ -186,16 +187,22 @@
     if (!SECTION) return;
     SECTION.classList.add('is-open');
     disableScroll(true);
-    // You can populate header with payload later if needed
-    // e.g., SECTION.querySelector('.sw-title').textContent = Session — ${payload?.name || ''};
+    
+    initializeEditor();
+    startTranscriptMonitoring();
   }
+  
   function closeSessionWindow(){
     if (!SECTION) return;
     SECTION.classList.remove('is-open');
     disableScroll(false);
+    
+    if (transcriptMonitor) {
+      clearInterval(transcriptMonitor);
+    }
   }
 
-  // Expose to global so your table code can call it
+  // Expose to global
   window.openSessionWindow  = openSessionWindow;
   window.closeSessionWindow = closeSessionWindow;
 
@@ -206,7 +213,7 @@
     if (e.key === 'Escape' && SECTION?.classList.contains('is-open')) closeSessionWindow();
   });
 
-  // ---- Editor wiring (same as before) ----
+  // ---- Editor wiring ----
   const editor = document.getElementById('sessEditor');
   function run(cmd, val=null){ editor.focus(); try{ document.execCommand(cmd, false, val); }catch{} }
   document.querySelectorAll('.sess-tbtn[data-cmd]').forEach(btn=>{
@@ -235,5 +242,92 @@
       if (el) el.classList.toggle('is-active', !!on);
     });
   });
+
+  // ================== SIMPLE TRANSCRIPT MONITORING ==================
+  
+  function initializeEditor() {
+    if (!editor) return;
+    
+    editor.innerHTML = `
+      <div style="text-align: center; color: #6b7280; padding: 20px; font-style: italic;">
+        💬 Live Conversation Transcript<br>
+        <small>Voice conversation will automatically appear here...</small>
+      </div>
+    `;
+  }
+  
+  function startTranscriptMonitoring() {
+    // Monitor for Vapi transcript elements
+    transcriptMonitor = setInterval(() => {
+      captureVapiTranscripts();
+    }, 1000);
+  }
+  
+  function captureVapiTranscripts() {
+    // Look for Vapi message elements in the DOM
+    const userMessages = document.querySelectorAll('.flex.justify-end .markdown-content p');
+    const assistantMessages = document.querySelectorAll('.flex.justify-start .markdown-content p');
+    
+    // Capture user messages (patient)
+    userMessages.forEach((message, index) => {
+      const text = message.textContent?.trim();
+      if (text && text.length > 2) {
+        appendToSOAPNotes('user', text, index);
+      }
+    });
+    
+    // Capture assistant messages (doctor)
+    assistantMessages.forEach((message, index) => {
+      const text = message.textContent?.trim();
+      if (text && text.length > 2) {
+        appendToSOAPNotes('assistant', text, index);
+      }
+    });
+  }
+  
+  function appendToSOAPNotes(role, text, index) {
+    if (!editor || !text) return;
+    
+    const messageId = `${role}-${index}-${text.substring(0, 20)}`;
+    
+    // Check if already added
+    if (editor.textContent.includes(text.substring(0, 30))) {
+      return;
+    }
+    
+    const speakerLabel = role === 'user' ? 'PATIENT' : 'DR. CHEN';
+    const timestamp = new Date().toLocaleTimeString();
+    
+    // Remove welcome message on first real message
+    if (editor.querySelector('div[style*="italic"]')) {
+      editor.innerHTML = '';
+    }
+    
+    const entry = document.createElement('div');
+    entry.style.cssText = 'margin-bottom: 12px; padding: 8px 12px; border-left: 4px solid #e5e7eb; background: #f9fafb; border-radius: 0 8px 8px 0;';
+    
+    if (role === 'user') {
+      entry.style.borderLeftColor = '#3b82f6';
+      entry.style.background = '#dbeafe';
+    } else {
+      entry.style.borderLeftColor = '#059669';
+      entry.style.background = '#d1fae5';
+    }
+    
+    const label = document.createElement('div');
+    label.style.cssText = 'font-weight: 700; font-size: 13px; margin-bottom: 4px;';
+    label.textContent = `${speakerLabel} • ${timestamp}`;
+    
+    const content = document.createElement('div');
+    content.style.cssText = 'color: #374151; line-height: 1.4;';
+    content.textContent = text;
+    
+    entry.appendChild(label);
+    entry.appendChild(content);
+    editor.appendChild(entry);
+    
+    editor.scrollTop = editor.scrollHeight;
+  }
+
 })();
 </script>

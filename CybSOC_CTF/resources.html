@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - CybSOC CTF 2024 </title>
+    <link rel="stylesheet" href="resources.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header">
+                <div>
+                    <img class="logo"
+                        src="https://pbs.twimg.com/profile_images/1582806733273047040/lpoDa6cU_400x400.jpg"
+                        alt="TAII Logo">
+                </div>
+                <div class="nav-bar">
+                    <nav>
+                        <a href="index.html">Registration</a>
+                        <a href="index.html">Participants</a>
+                        <a href="index.html">Results</a>
+                        <a href="#" class="active">Resources</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="main-title">CTF Resources & Tools</h1>
+            <p class="description">Essential resources and tools to help you succeed in the competition</p>
+
+            <div class="instructions">
+                <h2>How to Use This Page</h2>
+                <ul>
+                    <li>Each card below can display a different resource or tool</li>
+                    <li>Enter any URL in the input field and click "Load Iframe" to display content</li>
+                    <li>Use "Reset" to clear the iframe and return to placeholder content</li>
+                    <li>The layout is fully responsive and works on all devices</li>
+                </ul>
+            </div>
+
+            <div class="resources-grid">
+                <!-- Resource 1 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>CTF Documentation</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe1">
+                        <div class="placeholder-content">
+                            <i class="fas fa-book"></i>
+                            <p>CTF Guides & Documentation</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url1">
+                        <button class="btn btn-primary" onclick="loadIframe(1)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(1)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Resource 2 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>Practice Challenges</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe2">
+                        <div class="placeholder-content">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <p>Practice CTF Challenges</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url2">
+                        <button class="btn btn-primary" onclick="loadIframe(2)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(2)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Resource 3 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>Security Tools</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe3">
+                        <div class="placeholder-content">
+                            <i class="fas fa-tools"></i>
+                            <p>Security Tools & Utilities</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url3">
+                        <button class="btn btn-primary" onclick="loadIframe(3)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(3)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Resource 4 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>Reference Materials</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe4">
+                        <div class="placeholder-content">
+                            <i class="fas fa-file-alt"></i>
+                            <p>Reference & Cheat Sheets</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url4">
+                        <button class="btn btn-primary" onclick="loadIframe(4)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(4)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Resource 5 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>Live Scoreboard</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe5">
+                        <div class="placeholder-content">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Live Competition Scores</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url5">
+                        <button class="btn btn-primary" onclick="loadIframe(5)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(5)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Resource 6 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3>Community Forum</h3>
+                    </div>
+                    <div class="iframe-container" id="iframe6">
+                        <div class="placeholder-content">
+                            <i class="fas fa-users"></i>
+                            <p>Discussion & Community</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="url" class="url-input" placeholder="Enter URL here..." id="url6">
+                        <button class="btn btn-primary" onclick="loadIframe(6)">Load Iframe</button>
+                        <button class="btn btn-secondary" onclick="resetIframe(6)" style="margin-top: 8px;">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 CybSOC CTF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load iframe into specified card
+        function loadIframe(cardNumber) {
+            const urlInput = document.getElementById(`url${cardNumber}`);
+            const iframeContainer = document.getElementById(`iframe${cardNumber}`);
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+            
+            // Ensure URL has protocol
+            let finalUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                finalUrl = 'https://' + url;
+            }
+            
+            // Create iframe
+            iframeContainer.innerHTML = `<iframe src="${finalUrl}" frameborder="0"></iframe>`;
+            
+            // Save to localStorage
+            saveUrlToStorage(cardNumber, finalUrl);
+        }
+        
+        // Reset iframe to placeholder
+        function resetIframe(cardNumber) {
+            const iframeContainer = document.getElementById(`iframe${cardNumber}`);
+            const urlInput = document.getElementById(`url${cardNumber}`);
+            
+            iframeContainer.innerHTML = `
+                <div class="placeholder-content">
+                    <i class="fas fa-${getIconForCard(cardNumber)}"></i>
+                    <p>${getPlaceholderText(cardNumber)}</p>
+                </div>
+            `;
+            
+            urlInput.value = '';
+            
+            // Remove from localStorage
+            removeUrlFromStorage(cardNumber);
+        }
+        
+        // Get appropriate icon for each card
+        function getIconForCard(cardNumber) {
+            const icons = ['book', 'puzzle-piece', 'tools', 'file-alt', 'chart-line', 'users'];
+            return icons[cardNumber - 1] || 'globe';
+        }
+        
+        // Get placeholder text for each card
+        function getPlaceholderText(cardNumber) {
+            const texts = [
+                'CTF Guides & Documentation',
+                'Practice CTF Challenges',
+                'Security Tools & Utilities',
+                'Reference & Cheat Sheets',
+                'Live Competition Scores',
+                'Discussion & Community'
+            ];
+            return texts[cardNumber - 1] || 'Resource Content';
+        }
+        
+        // Save URL to localStorage
+        function saveUrlToStorage(cardNumber, url) {
+            const savedUrls = JSON.parse(localStorage.getItem('ctfResourceUrls')) || {};
+            savedUrls[cardNumber] = url;
+            localStorage.setItem('ctfResourceUrls', JSON.stringify(savedUrls));
+        }
+        
+        // Remove URL from localStorage
+        function removeUrlFromStorage(cardNumber) {
+            const savedUrls = JSON.parse(localStorage.getItem('ctfResourceUrls')) || {};
+            delete savedUrls[cardNumber];
+            localStorage.setItem('ctfResourceUrls', JSON.stringify(savedUrls));
+        }
+        
+        // Load saved URLs on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedUrls = JSON.parse(localStorage.getItem('ctfResourceUrls')) || {};
+            
+            for (let cardNumber in savedUrls) {
+                const url = savedUrls[cardNumber];
+                const iframeContainer = document.getElementById(`iframe${cardNumber}`);
+                const urlInput = document.getElementById(`url${cardNumber}`);
+                
+                if (iframeContainer && urlInput) {
+                    iframeContainer.innerHTML = `<iframe src="${url}" frameborder="0"></iframe>`;
+                    urlInput.value = url;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

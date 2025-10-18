@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CybSOC CTF 2024 - Argue with Argus</title>
+    <link rel="stylesheet" href="test_styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header">
+                <div>
+                    <img class="logo" src="https://pbs.twimg.com/profile_images/1582806733273047040/lpoDa6cU_400x400.jpg" alt="TAII Logo">
+                </div>
+                <div class="nav-bar">
+                    <nav>
+                        <a href="#" class="active" data-tab="registration">Registration</a>
+                        <a href="#" data-tab="participants">Participants</a>
+                        <a href="#" data-tab="results">Results</a>
+                        <a href="resources.html">Resources</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div>
+                <h1 class="main-title">CybSOC CTF 2024 - <span class="styleTitle">Argue with Argus</span></h1>
+                <h1 class="title">Welcome to CybSOC CTF 2024</h1>
+                <p class="description">Join us for an exciting Capture The Flag competition!</p>
+            </div>
+
+            <!-- Messages -->
+            <div id="message" class="message"></div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="registration">Registration</button>
+                <button class="tab" data-tab="participants">Participants</button>
+                <button class="tab" data-tab="results">Results</button>
+            </div>
+
+            <!-- Registration Tab -->
+            <div id="registration" class="tab-content active">
+                <div class="section">
+                    <h2 class="section-title">Register for CTF</h2>
+                    <form id="registrationForm">
+                        <div class="form-group">
+                            <label for="teamName">Team Name</label>
+                            <input type="text" id="teamName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="captainName">Captain Name</label>
+                            <input type="text" id="captainName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="members">Team Members (comma separated)</label>
+                            <textarea id="members" class="form-control" rows="3" placeholder="Enter team member names separated by commas"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register Team</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Participants Tab -->
+            <div id="participants" class="tab-content">
+                <div class="section">
+                    <h2 class="section-title">Manage Participants</h2>
+                    <div class="form-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search participants...">
+                    </div>
+                    <table id="participantsTable">
+                        <caption>
+                            CybSOC CTF 2024 Participants
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Team Name</th>
+                                <th scope="col">Captain</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Members</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="participantsTableBody">
+                            <!-- Participants will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div id="results" class="tab-content">
+                <div class="section">
+                    <h2 class="section-title">CTF Results</h2>
+                    <div class="form-group">
+                        <input type="text" id="resultsSearch" class="form-control" placeholder="Search results...">
+                    </div>
+                    <table id="resultsTable">
+                        <caption>
+                            CybSOC CTF 2024 Participants Scores
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Team Name</th>
+                                <th scope="col">Defence Score</th>
+                                <th scope="col">Attack Score</th>
+                                <th scope="col">Uptime</th>
+                                <th scope="col">Total Score</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                            <!-- Results will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer>
+                <p>&copy; 2024 CybSOC CTF. All rights reserved.</p>
+            </footer>
+        </div>
+    </main>
+    <script src="test.js"></script>
+</body>
+</html>

@@ -5,11 +5,11 @@
   --heading-font: "Playfair Display", serif;
   --body-font: "Lato", sans-serif;
 }
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 body {
   font-family: var(--body-font);
   color: #333;
@@ -212,4 +212,22 @@ footer p {
   text-align: left;
   font-size: 14px;
   margin-left: 23rem;
+}
+
+
+/* for about us page */
+
+.bg-header {
+  /* display: flex;
+  justify-content: center; */
+  background-color: yellow;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+  width: 100%;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
 }
